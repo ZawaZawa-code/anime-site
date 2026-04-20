@@ -4,6 +4,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 
 @Controller
 public class HomeController {
@@ -30,5 +32,17 @@ public class HomeController {
 
         model.addAttribute("anime", anime);
         return "detail";
+    }
+
+    @GetMapping("/anime/new")
+    public String showCreateForm(Model model) {
+        model.addAttribute("anime", new Anime());
+        return "create";
+    }
+
+    @PostMapping("/anime")
+    public String createAnime(@ModelAttribute Anime anime) {
+        animeRepository.save(anime);
+        return "redirect:/";
     }
 }

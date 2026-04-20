@@ -40,4 +40,19 @@ public class Anime {
         return rating;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setGenre(String genre) {
+        this.genre = genre;
+    }
+
+    public void setRating(double rating) {
+        this.rating = rating;
+    }
 }

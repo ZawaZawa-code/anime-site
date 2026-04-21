@@ -3,6 +3,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 public class Anime {
@@ -11,8 +13,12 @@ public class Anime {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "タイトルは必須です")
     private String title;
+
+    @NotBlank(message = "ジャンルは必須です")
     private String genre;
+
     private double rating;
 
     public Anime() {

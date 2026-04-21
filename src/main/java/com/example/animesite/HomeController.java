@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import jakarta.validation.Valid;
+import org.springframework.validation.BindingResult;
 
 @Controller
 public class HomeController {
@@ -41,10 +43,12 @@ public class HomeController {
     }
 
     @PostMapping("/anime")
-    public String createAnime(@ModelAttribute Anime anime) {
+    public String createAnime(
+            @Valid @ModelAttribute Anime anime,
+            BindingResult result) {
 
-        if(anime.getTitle() == null || anime.getTitle().trim().isEmpty()){
-            return "redirect:/anime/new";
+        if(result.hasErrors()){
+            return "create";
         }
 
         animeRepository.save(anime);

@@ -42,7 +42,19 @@ public class HomeController {
 
     @PostMapping("/anime")
     public String createAnime(@ModelAttribute Anime anime) {
+
+        if(anime.getTitle() == null || anime.getTitle().trim().isEmpty()){
+            return "redirect:/anime/new";
+        }
+
         animeRepository.save(anime);
         return "redirect:/";
     }
+
+    @PostMapping("/anime/{id}/delete")
+    public String deleteAnime(@PathVariable Long id) {
+        animeRepository.deleteById(id);
+        return "redirect:/";
+    }
+
 }

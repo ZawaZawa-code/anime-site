@@ -37,6 +37,21 @@
         a:hover {
             text-decoration: underline;
         }
+
+        .delete-button {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .delete-button:hover {
+            background-color: #b02a37;
+        }
+
     </style>
 </head>
 <body>
@@ -51,6 +66,10 @@
             </h2>
             <p>ジャンル：<span th:text="${anime.genre}"></span></p>
             <p>評価：<span th:text="${anime.rating}"></span></p>
+
+            <form th:action="@{/anime/{id}/delete(id=${anime.id})}" method="post">
+                <button type="submit" onclick="return confirm('本当に削除しますか？')" class="delete-button">削除</button>
+            </form>
         </li>
     </ul>
 </body>
